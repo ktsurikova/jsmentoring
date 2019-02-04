@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const newsProvider = require('../mongo/provider');
+const newsProvider = require('../mongo/newsprovider');
+const auth = require('./auth');
 
-router.post('/', newsProvider.add);
-router.get('/', newsProvider.getAll);
-router.get('/:id', newsProvider.getById);
-router.put('/:id', newsProvider.update);
-router.delete('/:id', newsProvider.remove);
+router.post('/', auth.optional, newsProvider.add);
+router.get('/', auth.optional, newsProvider.getAll);
+router.get('/:id', auth.optional, newsProvider.getById);
+router.put('/:id', auth.required, newsProvider.update);
+router.delete('/:id', auth.required, newsProvider.remove);
 
 module.exports = router;

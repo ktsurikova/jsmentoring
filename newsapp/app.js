@@ -1,8 +1,10 @@
+require('./config/passport');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 let newsRouter = require('./routes/news');
+let userRouter = require('./routes/user');
 const { createLogger, format, transports } = require('winston');
 const { combine, timestamp, printf } = format;
 
@@ -23,7 +25,7 @@ const logger = createLogger({
 
 const mongoose = require('mongoose');
 let uri = 'mongodb://root:2021Kate123@ds217138.mlab.com:17138/newsapp';
-mongoose.connect(uri);
+mongoose.connect(uri, { useNewUrlParser: true });
 let db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
@@ -45,6 +47,7 @@ app.use(function(req, res, next) {
 });
 
 app.use('/news', newsRouter);
+app.use('/user', userRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));
