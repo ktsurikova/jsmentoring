@@ -1,0 +1,19 @@
+<div class="news-detail">
+  <div class="news-detail--block news-detail--image-container">
+    <img [src]="news.urlToImage" alt="" class="news-detail--image">
+  </div>
+  <div class="news-detail--block news-detail--block-middle">
+    <div class="news-detail-info">
+      <p>{{news.title}}</p>
+      <div  class="news-detail-desc">{{news.description}}</div>
+      <a href="#">Read more ...</a>
+    </div>
+    <div class="news-detail-date">
+      {{news.publishedAt | date}}
+    </div>
+  </div>
+  <div class="news-detail--block news-detail--block-right" *ngIf="news.source.isLocal">
+    <button class="news-detail--button" type="button" name="button">Edit</button>
+    <button class="news-detail--button" type="button" name="button">Delete</button>
+  </div>
+</div>
