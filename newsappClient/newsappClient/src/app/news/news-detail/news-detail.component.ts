@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { News } from '../news';
+import { Router } from '@angular/router';
+import { WebStorageService, SESSION_STORAGE } from 'angular-webstorage-service';
 
 @Component({
   selector: 'app-news-detail',
@@ -7,21 +9,21 @@ import { News } from '../news';
   styleUrls: ['./news-detail.component.css']
 })
 export class NewsDetailComponent implements OnInit {
-  news: News;
+  @Input() news: News;
+  // news: News;
 
-  constructor() { }
+  constructor(private router: Router, @Inject(SESSION_STORAGE) private storage: WebStorageService) { }
 
   ngOnInit() {
-    // this.news = new News();
-    // this.news.author = 'Kate';
-    // this.news.content = 'SOmthwkjfldksjlksdjlk\ndsfafeafwefeafaefaew\nargwEFFRAHGJGAJHFAJH,. FGAFB. \n AWHGKJAHRKJ';
-    // this.news.description = 'Akjdskhfjkdfanfadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddskljkljkljlkjsdlfhrgahfbrekjvanfjakhfjkjsddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddhkjhjkhjhkjhkjhkhfkjhkjhkjhkjhkjhkjhkjhk';
-    // this.news.publishedAt = new Date();
-    // this.news.title = 'Titek1 dafgf';
-    // this.news.url = 'title-fdsjk';
-    // this.news.urlToImage = 'https://isme.ie/wp-content/uploads/2018/07/banner_add_news.jpg';
-    // this.news.source = {};
-    // this.news.source.isLocal = true;
+  }
+
+  isLocal(): boolean {
+    return this.news.source === 'local';
+  }
+
+  readMore(): void {
+    this.storage.set('news', this.news);
+    this.router.navigate(['/view']);
   }
 
 }

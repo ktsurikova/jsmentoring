@@ -2,6 +2,7 @@ require('./config/passport');
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 let newsRouter = require('./routes/news');
 let userRouter = require('./routes/user');
@@ -34,6 +35,7 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));

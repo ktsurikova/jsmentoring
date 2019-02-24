@@ -1,0 +1,10 @@
+.news-list-loadMore {
+  text-align: center;
+  margin-top: 10px;
+}
+
+#loadMore {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}

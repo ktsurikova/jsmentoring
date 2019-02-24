@@ -1,0 +1,39 @@
+.control {
+  display: block;
+  width: 330px;
+  border-radius: 5px;
+  border:1px solid;
+  padding: 5px;
+  margin-top: 5px;
+}
+
+.news-form-element {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.newsForm {
+  margin-top: 10px;
+}
+
+.news-form-left {
+  margin-left: 60px;
+  float: left;
+}
+
+.news-form-right {
+  float: right;
+  margin-right: 60px;
+}
+
+.news-form-button {
+  display: inline-block;
+  margin: 10px;
+  margin-left: 0px;
+  margin-right: 40px;
+  border-radius: 5px;
+  border: 1px solid;
+  padding: 10px;
+  font-size: 18px;
+  width: 100px;
+}

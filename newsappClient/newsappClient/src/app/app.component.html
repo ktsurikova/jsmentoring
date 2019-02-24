@@ -1,6 +1,6 @@
 <div class="container">
   <!-- header -->
-  <header class="panel">
+  <header class="panel panel-fixed">
     <div class="header-left">
       <img src="../assets/images/news_logo.png" alt="" class="news-logo">
     </div>
@@ -9,16 +9,14 @@
     </div>
   </header>
 
-  <div class="panel source-name">
+  <div class="panel source-name panel-fixed">
     <h2>{{title}}</h2>
   </div>
 
-  <div class="main-container">
-    <app-news-list></app-news-list>
-  </div>
+  <router-outlet></router-outlet>
 
   <!-- footer -->
-  <footer class="panel">
+  <footer class="panel footer">
     <div class="footer-right">
       <h5>Powered by NewsAPI, 2019</h5>
     </div>

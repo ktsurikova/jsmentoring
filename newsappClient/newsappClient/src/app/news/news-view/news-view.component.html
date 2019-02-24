@@ -1,0 +1,23 @@
+<div class="main-container">
+  <div class="news-view">
+    <div class="news-view--block news-view--image-container">
+      <img [src]="news.urlToImage" alt="" class="news-view--image">
+    </div>
+    <div class="news-view--block news-view--block-middle">
+      <div class="news-view-info">
+        <p>{{news.title}}</p>
+        <div class="news-detail-desc">{{news.content || news.description}}</div>
+      </div>
+      <div class="">
+        {{news.publishedAt | date}}
+      </div>
+      <div class="">
+        {{news.author}}
+      </div>
+    </div>
+    <div class="news-view--block news-view--block-right" *ngIf="isLocal()">
+      <button class="news-view--button" type="button" name="button" [routerLink]="['/edit', news.url]">Edit</button>
+      <button class="news-view--button" type="button" name="button">Delete</button>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,12 @@
-<div class="news-list">
-  <div class="" *ngFor="let news of newsCollection">
-    <app-news-detail></app-news-detail>
+<div class="panel panel-fixed">
+  <app-news-tab></app-news-tab>
+</div>
+
+<div class="main-container">
+  <div class="news-list">
+    <app-news-detail *ngFor="let news of newsData" [news]="news"></app-news-detail>
+    <div class="news-list-loadMore" *ngIf="isloadMoreEnabled()">
+      <button type="button" name="button" id="loadMore" (click)="loadMore()">Load More</button>
+    </div>
   </div>
 </div>

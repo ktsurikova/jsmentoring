@@ -5,15 +5,15 @@
   <div class="news-detail--block news-detail--block-middle">
     <div class="news-detail-info">
       <p>{{news.title}}</p>
-      <div  class="news-detail-desc">{{news.description}}</div>
-      <a href="#">Read more ...</a>
+      <div class="news-detail-desc">{{news.description}}</div>
+      <div (click)="readMore()" style="cursor:pointer;">Read more ...</div>
     </div>
     <div class="news-detail-date">
       {{news.publishedAt | date}}
     </div>
   </div>
-  <div class="news-detail--block news-detail--block-right" *ngIf="news.source.isLocal">
-    <button class="news-detail--button" type="button" name="button">Edit</button>
+  <div class="news-detail--block news-detail--block-right" *ngIf="isLocal()">
+    <button class="news-detail--button" type="button" name="button" [routerLink]="['/edit', news.url]">Edit</button>
     <button class="news-detail--button" type="button" name="button">Delete</button>
   </div>
 </div>

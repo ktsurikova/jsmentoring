@@ -1,0 +1,38 @@
+<div class="main-container">
+  <form [formGroup]="newsForm" class="newsForm">
+    <div class="news-form-left">
+      <div class="news-form-element">
+        <label for="title">Heading*</label>
+        <input class="control" type="text" name="" formControlName="title" id="title">
+      </div>
+      <div class="news-form-element">
+        <label for="description">Short description</label>
+        <input class="control" type="text" name="" formControlName="description" id="description">
+      </div>
+      <div class="news-form-element">
+        <label for="content">Content*</label>
+        <textarea rows="8" class="control" type="text" name="" formControlName="content" id="content"></textarea>
+      </div>
+    </div>
+    <div class="news-form-right">
+      <div class="news-form-element">
+        <label for="image">Image*</label>
+        <input class="control" type="text" name="" formControlName="urlToImage" id="image">
+      </div>
+      <div class="news-form-element">
+        <label for="date">Date</label>
+        <input class="control" type="text" name="" formControlName="publishedAt" id="date">
+      </div>
+      <div class="news-form-element">
+        <label for="author">Author*</label>
+        <input class="control" type="text" name="" formControlName="author" id="author">
+      </div>
+      <div class="news-form-element">
+        <label for="url">Source Url*</label>
+        <input class="control" type="text" name="" formControlName="url" id="url">
+      </div>
+      <button class="news-form-button" type="submit" [disabled]="!newsForm.valid" (click)="onSave()">Save</button>
+      <button class="news-form-button" type="submit" [disabled]="" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</div>

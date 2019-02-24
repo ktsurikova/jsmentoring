@@ -1,31 +1,57 @@
-import { Component, OnInit } from '@angular/core';
-import { News } from '../news';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { News, NewsData } from '../news';
+import { NewsService } from '../service/news.service';
+import { NewsPage } from '../service/news-page';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-news-list',
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.css']
 })
-export class NewsListComponent implements OnInit {
-  newsCollection: News[];
-
-  constructor() { }
+export class NewsListComponent implements OnInit, OnDestroy {
+  newsData: News[];
+  newsPage: NewsPage = new NewsPage();
+  subscription: Subscription;
+  constructor(private newsService: NewsService) { }
 
   ngOnInit() {
-    this.newsCollection = [];
-    let n: News = new News();
-    n.author = 'Kate';
-    n.content = 'SOmthwkjfldksjlksdjlk\ndsfafeafwefeafaefaew\nargwEFFRAHGJGAJHFAJH,. FGAFB. \n AWHGKJAHRKJ';
-    n.description = 'Akjdskhfjkdfanfadddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddskljkljkljlkjsdlfhrgahfbrekjvanfjakhfjkjsddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddhkjhjkhjhkjhkjhkhfkjhkjhkjhkjhkjhkjhkjhk';
-    n.publishedAt = new Date();
-    n.title = 'Titek1 dafgf';
-    n.url = 'title-fdsjk';
-    n.urlToImage = 'https://isme.ie/wp-content/uploads/2018/07/banner_add_news.jpg';
-    n.source = {};
-    n.source.isLocal = true;
-    for (let i = 0; i < 5; i++) {
-        this.newsCollection.push(n);
+   this.newsPage.currentPage = 0;
+   this.subscription = this.newsService.getNews().subscribe(news => {
+     console.log('news', news);
+     if (news.currentPage === 1) {
+       this.newsData = news.news;
+     } else {
+       news.news.forEach(n => this.newsData.push(n));
+     }
+     this.fillNewsPage(news);
+   });
+  }
+
+  isloadMoreEnabled() {
+    const flag = this.newsPage ? this.newsPage.loadMore() : false;
+    console.log('flag', flag);
+    return flag;
+  }
+
+  loadMore() {
+    if (this.isloadMoreEnabled()) {
+      this.newsService.loadMore(this.newsPage);
+      // this.newsService.getNews(this.newsPage).subscribe(news => {
+      //   console.log('news', news);
+      //   news.news.forEach(n => this.newsData.push(n));
+      //   this.fillNewsPage(news.totalResults);
+      // });
     }
+  }
+
+  fillNewsPage(newsData: NewsData) {
+    this.newsPage.totalResults = newsData.totalResults;
+    this.newsPage.currentPage = newsData.currentPage;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

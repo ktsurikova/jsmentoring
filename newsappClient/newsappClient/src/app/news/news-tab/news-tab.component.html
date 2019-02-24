@@ -1,0 +1,8 @@
+<div class="news-tab">
+  <select [(ngModel)]="selectedSource" (ngModelChange)="onSourceChange($event)" [disabled]="local" class="sourceSelect">
+    <option *ngFor="let source of sources" [ngValue]="source">{{source.name}}</option>
+  </select>
+  <input type="text" [(ngModel)]="search" class="searchInput" (ngModelChange)="onSearchChange($event)" placeholder="Type your text..."/>
+  <input type="checkbox" [(ngModel)]="local" (ngModelChange)="onLocalChange($event)"/> Only created by me
+  <button type="button" name="button" class="addArticleButton" routerLink="/create">Add Article</button>
+</div>
